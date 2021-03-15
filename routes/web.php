@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiKeysController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -37,3 +39,8 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/profile', function () {
     // Only verified users may access this route...
 })->middleware('verified');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/profile', ProfileController::class);
+    Route::resource('/api-keys', ApiKeysController::class);
+});
