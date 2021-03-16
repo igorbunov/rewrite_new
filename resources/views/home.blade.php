@@ -14,7 +14,18 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    hello,
+
+                    @auth
+
+                    you are logged in
+
+                    @else
+
+                    you are guest
+
+                    @endauth
+
                 </div>
             </div>
         </div>

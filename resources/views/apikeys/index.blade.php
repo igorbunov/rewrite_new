@@ -3,6 +3,11 @@
 
     <h4>Api Keys</h3>
 
+
+    <a class="btn btn-primary" href="{{ route('api-keys.create') }}">Add key</a>
+    <br/>
+    <br/>
+
     <table class="table">
         <thead>
             <tr>
@@ -18,7 +23,12 @@
                 <td>{{ $apiKey->api_key }}</td>
                 <td>
                     <a href="{{ route('api-keys.edit', $apiKey->id) }}" class="btn btn-sm btn-info">Edit</a>
-                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+
+                    <form class="d-inline-flex" method="POST" action="{{ route('api-keys.destroy', $apiKey->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                    </form>
                 </td>
             </tr>
         @empty

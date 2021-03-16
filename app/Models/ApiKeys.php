@@ -11,7 +11,7 @@ class ApiKeys extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['api_key'];
+    protected $fillable = ['api_key', 'user_id'];
 
     public function user()
     {
