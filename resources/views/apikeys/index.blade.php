@@ -24,7 +24,11 @@
                 <td>
                     <a href="{{ route('api-keys.edit', $apiKey->id) }}" class="btn btn-sm btn-info">Edit</a>
 
-                    <form class="d-inline-flex" method="POST" action="{{ route('api-keys.destroy', $apiKey->id) }}">
+                    <form
+                        class="d-inline-flex"
+                        onsubmit="return confirm('Are you sure?');"
+                        method="POST"
+                        action="{{ route('api-keys.destroy', $apiKey->id) }}">
                         @csrf
                         @method('DELETE')
                         <input type="submit" class="btn btn-sm btn-danger" value="Delete">
