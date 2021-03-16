@@ -20,27 +20,31 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/email/verify', function () {
+        return view('auth.verify');
+    })->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+    Route::post('/email/resend', function(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
 
-    return redirect('/');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+        return back()->withSuccess('Verification link resent!');
+    })->name('verification.resend');
 
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
 
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+        return redirect('/');
+    })->middleware(['signed'])->name('verification.verify');
 
-Route::get('/profile', function () {
-    // Only verified users may access this route...
-})->middleware('verified');
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
 
-Route::group(['middleware' => 'auth'], function () {
+        return back()->withSuccess('Verification link sent!');
+    })->middleware(['throttle:6,1'])->name('verification.send');
+});
+
+Route::group(['middleware' => ['auth', 'verified:verification.notice']], function () {
     Route::resource('/profile', ProfileController::class);
     Route::resource('/api-keys', ApiKeysController::class);
 });
