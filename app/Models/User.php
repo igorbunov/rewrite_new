@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\ProjectController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,5 +45,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function apiKeys()
     {
         return $this->hasMany(ApiKeys::class, 'user_id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

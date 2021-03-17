@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiKeysController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
@@ -47,4 +48,5 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => ['auth', 'verified:verification.notice']], function () {
     Route::resource('/profile', ProfileController::class);
     Route::resource('/api-keys', ApiKeysController::class);
+    Route::resource('/projects', ProjectController::class);
 });

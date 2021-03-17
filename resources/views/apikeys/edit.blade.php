@@ -23,7 +23,7 @@
                         @enderror
 
                         <br/>
-                        <input type="submit" class="btn btn-primary" value="Create" />
+                        <input type="submit" class="btn btn-primary" value="Save" />
                     </form>
                 </div>
             </div>
