@@ -14,17 +14,38 @@
                     <br/>
 
                     <div class="row">
-                        <div class="col">
-                            @forelse ($projects as $project)
-                                <div>
-                                    {{ $loop->iteration }}
-                                    {{ $project->title }}
-                                    {{ $project->created_at->toDateTimeString() }}
-                                </div>
-                            @empty
-                                no projects.
-                            @endforelse
-                        </div>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Create date</th>
+                                    <th>Hours spend</th>
+                                    <th></th>
+                                </tr>
+
+                                @forelse ($projects as $project)
+                                    <tr>
+                                        <td>{{ $project->id }}</td>
+                                        <td>{{ $project->name }}</td>
+                                        <td>{{ $project->created_at->format('d.m.Y H:i') }}</td>
+                                        <td>{{ $project->working_hours }}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-info" href="{{ route('projects.show', $project->id) }}">View</a>
+                                            {{-- <a class="btn btn-sm btn-danger">Delete</a> --}}
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr><td colspan="4">no projects.</td></tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <br/>
+
+                    <div class="d-flex justify-content-center">
+                        {{ $projects->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
             </div>

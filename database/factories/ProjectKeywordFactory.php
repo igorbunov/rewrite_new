@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Project;
+use App\Models\ProjectKeyword;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProjectFactory extends Factory
+class ProjectKeywordFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Project::class;
+    protected $model = ProjectKeyword::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,10 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
-            'name' => $this->faker->name,
-            'text' => $this->faker->text,
-            'is_working_now' => 0,
-            'working_minutes' => rand(0, 180)
+            'project_id' => rand(1, 10),
+            'keyword' => $this->faker->word(),
+            'repeat_plan' => rand(1, 5),
+            'repeat_fact' => rand(0, 1)
         ];
     }
 }
