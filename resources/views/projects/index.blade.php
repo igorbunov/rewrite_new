@@ -45,7 +45,7 @@
                     <br/>
 
                     <div class="d-flex justify-content-center">
-                        {{ $projects->onEachSide(1)->links('vendor.pagination.bootstrap-4') }}
+                        {{ $projects->links() }}
                     </div>
                 </div>
             </div>
