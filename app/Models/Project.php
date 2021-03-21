@@ -30,7 +30,7 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function projectKeywords()
+    public function keywords()
     {
         return $this->hasMany(ProjectKeyword::class);
     }

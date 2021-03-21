@@ -16,7 +16,7 @@
 
                         <br />
 
-                        @include('partials.project-keys-grid')
+                        {{-- @include('partials.project-keys-grid') --}}
 
                         <br/>
                         <input type="submit" class="btn btn-primary" value="Create" />

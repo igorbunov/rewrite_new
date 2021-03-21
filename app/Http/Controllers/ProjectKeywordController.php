@@ -2,84 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreKeywordRequest;
+use App\Models\Project;
 use App\Models\ProjectKeyword;
 use Illuminate\Http\Request;
 
 class ProjectKeywordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Project $project)
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Project $project)
+    {
+        return view('projects.keywords.create', compact('project'));
+    }
+
+    public function store(Project $project, StoreKeywordRequest $request)
+    {
+        ProjectKeyword::create(
+            $request->validated() +
+            [
+                'project_id' => $project->id,
+                'repeat_fact' => 0
+            ]
+        );
+
+        return redirect()->route('projects.show', $project)->withSuccess('Keyword added succesfully');
+    }
+
+    public function show(Project $project, ProjectKeyword $keyword)
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function edit(Project $project, ProjectKeyword $keyword)
     {
-        //
+        return view('projects.keywords.edit', compact('project', 'keyword'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProjectKeyword  $projectKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProjectKeyword $projectKeyword)
+    public function update(Project $project, StoreKeywordRequest $request, ProjectKeyword $keyword)
     {
-        //
+        $keyword->update($request->validated());
+
+        return redirect()->route('projects.show', $project)->withSuccess('Keyword updated succesfully');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ProjectKeyword  $projectKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ProjectKeyword $projectKeyword)
+    public function destroy(Project $project, ProjectKeyword $keyword)
     {
-        //
-    }
+        $keyword->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProjectKeyword  $projectKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ProjectKeyword $projectKeyword)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ProjectKeyword  $projectKeyword
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProjectKeyword $projectKeyword)
-    {
-        //
+        return redirect()->route('projects.show', $project)->withSuccess('Keyword deleted succesfully');
     }
 }

@@ -27,5 +27,12 @@ Route::group(['middleware' => ['auth', 'verified:verification.notice']], functio
     Route::resource('/profile', ProfileController::class);
     Route::resource('/api-keys', ApiKeysController::class);
     Route::resource('/projects', ProjectController::class);
-    Route::resource('/project-keywords', ProjectKeywordController::class);
+    // Route::get(
+    //     '/projects/{project}/project-keywords/create/',
+    //     [ProjectKeywordController::class, 'create']
+    // )->name('project-keywords.create');
+    // Route::resource('/project-keywords', ProjectKeywordController::class)
+    //     ->except('create');
+
+    Route::resource('/projects.keywords', ProjectKeywordController::class);
 });

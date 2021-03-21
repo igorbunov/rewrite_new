@@ -1,5 +1,5 @@
 <div class="mt-3">
-    <a href="{{ route('project-keywords.create') }}" class="btn btn-primary">New key</a>
+    <a href="{{ route('projects.keywords.create', $project) }}" class="btn btn-primary">New key</a>
     <br/>
     <br/>
 
@@ -13,19 +13,19 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($project->projectKeywords as $keyword)
+            @forelse($project->keywords as $keyword)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $keyword->keyword }}</td>
                 <td>{{ $keyword->repeat_fact }} / {{ $keyword->repeat_plan }}</td>
                 <td>
-                    <a href="{{ route('project-keywords.edit', $keyword->id) }}" class="btn btn-sm btn-info">Edit</a>
+                    <a href="{{ route('projects.keywords.edit', [$project, $keyword]) }}" class="btn btn-sm btn-info">Edit</a>
 
                     <form
                         class="d-inline-flex"
                         onsubmit="return confirm('Are you sure?');"
                         method="POST"
-                        action="{{ route('project-keywords.destroy', $keyword->id) }}">
+                        action="{{ route('projects.keywords.destroy', [$project, $keyword]) }}">
                         @csrf
                         @method('DELETE')
                         <input type="submit" class="btn btn-sm btn-danger" value="Delete">
