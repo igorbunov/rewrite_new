@@ -36,9 +36,14 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EditProjectNameRequest $request)
     {
-        //
+        $project = Project::create($request->validated() + [
+            'text' => '',
+            'user_id' => auth()->id()
+        ]);
+
+        return redirect()->route('projects.edit', $project)->withSuccess('Project created succesfully');
     }
 
     /**
@@ -49,9 +54,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('keywords');
-
-        return view('projects.show', compact('project'));
+        return view('projects.work', compact('project'));
     }
 
     /**
@@ -62,7 +65,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $project->load('keywords');
+
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -87,6 +92,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return back()->withSuccess('Project deleted succesfully');
     }
 }

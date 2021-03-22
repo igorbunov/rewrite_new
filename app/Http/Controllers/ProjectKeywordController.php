@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreKeywordRequest;
 use App\Models\Project;
 use App\Models\ProjectKeyword;
-use Illuminate\Http\Request;
 
 class ProjectKeywordController extends Controller
 {
@@ -29,7 +28,7 @@ class ProjectKeywordController extends Controller
             ]
         );
 
-        return redirect()->route('projects.show', $project)->withSuccess('Keyword added succesfully');
+        return redirect()->route('projects.edit', $project)->withSuccess('Keyword added succesfully');
     }
 
     public function show(Project $project, ProjectKeyword $keyword)
@@ -46,13 +45,13 @@ class ProjectKeywordController extends Controller
     {
         $keyword->update($request->validated());
 
-        return redirect()->route('projects.show', $project)->withSuccess('Keyword updated succesfully');
+        return redirect()->route('projects.edit', $project)->withSuccess('Keyword updated succesfully');
     }
 
     public function destroy(Project $project, ProjectKeyword $keyword)
     {
         $keyword->delete();
 
-        return redirect()->route('projects.show', $project)->withSuccess('Keyword deleted succesfully');
+        return redirect()->route('projects.edit', $project)->withSuccess('Keyword deleted succesfully');
     }
 }

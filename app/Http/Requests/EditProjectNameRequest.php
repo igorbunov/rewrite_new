@@ -25,7 +25,8 @@ class EditProjectNameRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:5',
-            'plan' => 'string'
+            'plan' => 'string',
+            'text' => 'string'
         ];
     }
 }

@@ -8,19 +8,58 @@
                 <div class="card-header">New Project</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('projects.store') }}">
-                        @csrf
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                id="general-tab"
+                                data-toggle="tab"
+                                href="#general"
+                                role="tab"
+                                aria-controls="general"
+                                aria-selected="true">General</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled"
+                                id="keywords-tab"
+                                data-toggle="tab"
+                                href="#keywords"
+                                role="tab"
+                                aria-controls="keywords"
+                                aria-selected="false">Keywords</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled"
+                                id="plan-tab"
+                                data-toggle="tab"
+                                href="#plan"
+                                role="tab"
+                                aria-controls="plan"
+                                aria-selected="false">Plan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled"
+                                id="source-tab"
+                                data-toggle="tab"
+                                href="#source"
+                                role="tab"
+                                aria-controls="source"
+                                aria-selected="false">Source</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                            @include('partials.project-general-create')
+                        </div>
+                        <div class="tab-pane fade" id="keywords" role="tabpanel" aria-labelledby="keywords-tab">
 
-                        <label for="project-name">Name</label>
-                        <input type="text" id="project-name" name="name" class="form-control"/>
+                        </div>
+                        <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
 
-                        <br />
+                        </div>
+                        <div class="tab-pane fade" id="source" role="tabpanel" aria-labelledby="source-tab">
 
-                        {{-- @include('partials.project-keys-grid') --}}
-
-                        <br/>
-                        <input type="submit" class="btn btn-primary" value="Create" />
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -31,8 +31,17 @@
                                         <td>{{ $project->created_at->format('d.m.Y H:i') }}</td>
                                         <td>{{ $project->working_hours }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="{{ route('projects.show', $project->id) }}">View</a>
-                                            {{-- <a class="btn btn-sm btn-danger">Delete</a> --}}
+                                            <a class="btn btn-sm btn-secondary" href="{{ route('projects.show', $project->id) }}">Work</a>
+                                            <a class="btn btn-sm btn-info" href="{{ route('projects.edit', $project->id) }}">Edit</a>
+                                            <form
+                                                class="d-inline-flex"
+                                                onsubmit="return confirm('Are you sure?');"
+                                                method="POST"
+                                                action="{{ route('projects.destroy', $project->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty
