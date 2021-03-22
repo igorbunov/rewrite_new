@@ -29,12 +29,21 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                id="contact-tab"
+                                id="plan-tab"
                                 data-toggle="tab"
-                                href="#contact"
+                                href="#plan"
                                 role="tab"
-                                aria-controls="contact"
-                                aria-selected="false">Contact</a>
+                                aria-controls="plan"
+                                aria-selected="false">Plan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                id="source-tab"
+                                data-toggle="tab"
+                                href="#source"
+                                role="tab"
+                                aria-controls="source"
+                                aria-selected="false">Source</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -44,8 +53,11 @@
                         <div class="tab-pane fade" id="keywords" role="tabpanel" aria-labelledby="keywords-tab">
                             @include('partials.project-keywords-grid', ['project' => $project])
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            tab content
+                        <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+                            @include('partials.project-plan', ['project' => $project])
+                        </div>
+                        <div class="tab-pane fade" id="source" role="tabpanel" aria-labelledby="source-tab">
+                            @include('partials.project-source', ['project' => $project])
                         </div>
                     </div>
                 </div>

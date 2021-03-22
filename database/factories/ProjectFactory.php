@@ -25,6 +25,7 @@ class ProjectFactory extends Factory
             'user_id' => 1,
             'name' => $this->faker->name,
             'text' => $this->faker->text,
+            'plan' => $this->faker->text,
             'is_working_now' => 0,
             'working_minutes' => rand(0, 180)
         ];

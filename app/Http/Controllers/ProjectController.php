@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditProjectNameRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -71,9 +72,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(EditProjectNameRequest $request, Project $project)
     {
-        //
+        $project->update($request->validated());
+
+        return back()->withSuccess('Project updated succesfully');
     }
 
     /**

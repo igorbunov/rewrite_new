@@ -15,6 +15,7 @@ class Project extends Model
         'user_id',
         'name',
         'text',
+        'plan',
         'is_working_now',
         'working_minutes'
     ];
